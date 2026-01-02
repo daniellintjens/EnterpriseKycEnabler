@@ -1,0 +1,13 @@
+.env
+app/static/test.js
+app/static/test.json
+app/static/test.xml
+flask_sqlite3.db
+log
+venv
+app/static/js/test.json
+app/static/js/Test.xml
+.DS_Store
+app/main/__pycache__
+app/main/__pycache__/
+/app/main/__pycache__

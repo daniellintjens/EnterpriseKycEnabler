@@ -1,0 +1,7 @@
+flask
+flask_cors
+python-dotenv
+#===0.21.1
+requests
+#pyopenssl
+#flask_socketio
