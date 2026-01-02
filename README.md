@@ -14,16 +14,6 @@
   - requests
 
 
-## Quick Start with GitHub Codespaces
-
-This repository is configured to work with [GitHub Codespaces](https://github.com/features/codespaces). Click the badge below to launch a Codespace with all dependencies pre-installed.
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new/adyen-examples/adyen-python-online-payments?ref=main&devcontainer_path=.devcontainer%2Fdevcontainer.json)
-
-However, you must create the "log" directory manually in the created codespace.
-
-For detailed setup instructions, see the [GitHub Codespaces Instructions](https://github.com/adyen-examples/.github/blob/main/pages/codespaces-instructions.md).
-
 ## Local Installation
 
 1. Clone this repo:
