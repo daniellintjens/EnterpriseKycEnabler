@@ -3,6 +3,7 @@
 
 ## Details
 This project gives you an easy way to remove any blocking KYC for _enterprise payouts_ and _enterprise bank_ accountholders in TEST. It kind of works the same as the [tool found on rooftown]([url](https://www.rooftown.nl/payouts?type=workshop)) https://www.rooftown.nl/payouts?type=workshop. 
+This tool will give you a bit more flexibility as you can freely edit the messages before sending, and patch in any changes needed for your specific case. As the source is available and the tool can easely be run locally, patching the tool when there are any bugs, new LEM API changes or missing functionality should be easy. 
 
 ## Known issues
 ### 2nd request sometimes fails
