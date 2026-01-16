@@ -2,7 +2,7 @@
 
 
 ## Details
-This project gives you an easy way to remove any blocking KYC for _enterprise payouts_ and _enterprise bank_ accountholders in TEST. It kind of works the same as the [tool found on rooftown]([url](https://www.rooftown.nl/payouts?type=workshop)) . 
+This project gives you an easy way to remove any blocking KYC for _enterprise payouts_ and _enterprise bank_ accountholders in TEST. It kind of works the same as the [tool found on rooftown]([url](https://www.rooftown.nl/payouts?type=workshop)) https://www.rooftown.nl/payouts?type=workshop. 
 
 ## Known issues
 ### 2nd request sometimes fails
