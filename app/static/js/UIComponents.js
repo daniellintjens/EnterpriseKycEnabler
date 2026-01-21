@@ -13,7 +13,13 @@ const fireRequest = async (item) => {
   // Simulate an API call delay
   item.responseDisplay.innerHTML = 'Loading...';
   try {
-      const result = await sendData(item.requestType, optionApiKey.value, item.endpointDisplay.innerText, item.requestDisplay.innerText)
+      const requestMessage = item.requestDisplay.textContent;
+      let sanitizedRequestMessage = item.requestDisplay.textContent;
+      if (requestMessage){
+        sanitizedRequestMessage = requestMessage.replace(/[^\x00-\x7F]/g, "");
+      }
+      
+      const result = await sendData(item.requestType, optionApiKey.value, item.endpointDisplay.innerText, sanitizedRequestMessage)
       if (result?.requestOk){
         console.log('✅ Request successful!');
       } else {
@@ -21,7 +27,7 @@ const fireRequest = async (item) => {
       }
       console.log('API Response Data:', result);
       var jsonString = JSON.stringify(result.apiResponse, function replacer(key, value) { if (typeof (value) === 'function') { return value.toString(); } return value;}, 2);
-      item.responseDisplay.innerText = jsonString;
+      item.responseDisplay.textContent = jsonString;
       return result
   }
   catch (error)  {
@@ -35,10 +41,56 @@ const handleRegenerate = (item) => {
     console.log(`🔄 Regenerating content for: ${item.name}`);
     // reset the requestDisplay content 
     //TODO: the request should be saved so this function can "reset" it. 
-    item.requestDisplay.innerText = item.requestBackupForRegeneration;
-    item.endpointDisplay.innerText = item.endpoint;
+    item.requestDisplay.textContent = item.requestBackupForRegeneration;
+    item.endpointDisplay.textContent = item.endpoint;
 };
  
+
+
+
+function pasteEventListner(e){
+  
+    e.preventDefault();
+
+    // 1. Get plain text from clipboard
+    const text = (e.clipboardData || window.clipboardData).getData('text');
+
+    // 2. Scrub non-ASCII characters
+    // Matches everything NOT in the ASCII range 32-126, plus tabs and newlines
+    const cleanedText = text.replace(/[^\x20-\x7E\t\n\r]/g, "");
+
+    // 3. Get the current selection/cursor position
+    const selection = window.getSelection();
+    if (!selection.rangeCount) return;
+    selection.deleteFromDocument(); // Deletes selected text if user is highlighting
+
+    // 4. Create a text node with the clean data and insert it
+    const textNode = document.createTextNode(cleanedText);
+    selection.getRangeAt(0).insertNode(textNode);
+
+    // 5. Move the cursor to the end of the newly inserted text
+    selection.collapseToEnd();
+};
+
+function validateJsonBackground(targetDiv) {
+    const text = targetDiv.textContent.trim();
+
+    // Default white background if empty
+    if (text === "") {
+        targetDiv.style.backgroundColor = "white";
+        return;
+    }
+
+    try {
+        JSON.parse(text);
+        // Valid JSON: Reset to white (or a very light green if preferred)
+        targetDiv.style.backgroundColor = "white"; 
+    } catch (e) {
+        // Invalid JSON: Apply a light red tint
+        targetDiv.style.backgroundColor = "#fff0f0"; 
+    }
+}
+
  function addTextinput(id, option) {
     const targetDiv = document.getElementById(id);
 
@@ -198,17 +250,17 @@ function addAccordionItem(accordionId, option) {
     const accordionBodyContent = `
     <div class="p-2 border rounded bg-light mb-3">
         <h6 class="mb-1 text-primary">Endpoint</h6>
-        <div id="${endpointId}" contenteditable="true" style="min-height: 30px; border: 1px solid #ccc; padding: 5px; background-color: white;">   
+        <div id="${endpointId}" contenteditable="true" style="min-height: 30px; border: 1px solid #ccc; padding: 5px; background-color: white; font-family: monospace;">   
         </div>
     </div>
     <div class="p-2 border rounded bg-light mb-3">
         <h6 class="mb-1 text-primary">Request</h6>
-        <div id="${requestId}" contenteditable="true" style="min-height: 50px; border: 1px solid #ccc; padding: 5px; background-color: white;">   
+        <div id="${requestId}" contenteditable="true" style="min-height: 50px; border: 1px solid #ccc; padding: 5px; background-color: white; white-space: pre-wrap; font-family: monospace;">   
         </div>
     </div>
     <div class="p-2 border rounded bg-light">
         <h6 class="mb-1 text-success">Response</h6>
-        <div id="${responseId}">
+        <div id="${responseId}" contenteditable="false" style="min-height: 50px; border: 1px solid #ccc; padding: 5px; background-color: white; white-space: pre-wrap; font-family: monospace;">
             No response yet.
         </div>
     </div>
@@ -275,10 +327,16 @@ function addAccordionItem(accordionId, option) {
     // Assign references (must be done AFTER insertion)
     const newCheckbox = accordion.querySelector(`#checkbox_${collapseId}`);
     const requestDiv = accordion.querySelector(`#${requestId}`);
-    requestDiv.innerText = option.request;
+    requestDiv.textContent = option.request;
+    requestDiv.addEventListener('paste', (e) => { pasteEventListner(e); });
+    requestDiv.addEventListener('input', () => {
+      validateJsonBackground(requestDiv);
+    });
     const responseDiv = accordion.querySelector(`#${responseId}`);
     const endpointDiv = accordion.querySelector(`#${endpointId}`);
-    endpointDiv.innerText = option.endpoint;
+    endpointDiv.textContent = option.endpoint;
+    endpointDiv.addEventListener('paste', (e) => { pasteEventListner(e); });
+
 
     if (newCheckbox) option.checkboxElement = newCheckbox;
     // Store references to the display areas for later updates
