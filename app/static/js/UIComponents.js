@@ -328,7 +328,10 @@ function addAccordionItem(accordionId, option) {
     const newCheckbox = accordion.querySelector(`#checkbox_${collapseId}`);
     const requestDiv = accordion.querySelector(`#${requestId}`);
     requestDiv.textContent = option.request;
-    requestDiv.addEventListener('paste', (e) => { pasteEventListner(e); });
+    requestDiv.addEventListener('paste', (e) => { 
+      pasteEventListner(e); 
+      validateJsonBackground(requestDiv);
+    });
     requestDiv.addEventListener('input', () => {
       validateJsonBackground(requestDiv);
     });
@@ -360,6 +363,7 @@ function addAccordionItem(accordionId, option) {
         regenButton.addEventListener('click', (event) => {
             //event.stopPropagation();
             handleRegenerate(option); 
+            validateJsonBackground(option.requestDisplay);
         });
     }
 }
