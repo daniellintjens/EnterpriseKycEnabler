@@ -76,7 +76,13 @@ let patchOrganizationApiCall = {
                     "stateOrProvince": "NH",
                     "street": "Rokin 49",
                     "street2": "Rokin 21"
-                }
+                },
+                "principalPlaceOfBusiness": {
+                    "street": "Rokin 21",
+                    "city": "Amsterdam",
+                    "postalCode": "1010CG",
+                },
+                "doingBusinessAs": "Adyen"
             }
         }, function replacer(key, value) { if (typeof (value) === 'function') { return value.toString(); } return value; }, 2),
 
