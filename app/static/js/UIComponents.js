@@ -41,7 +41,25 @@ const handleRegenerate = (item) => {
     console.log(`🔄 Regenerating content for: ${item.name}`);
     // reset the requestDisplay content 
     //TODO: the request should be saved so this function can "reset" it. 
-    item.requestDisplay.textContent = item.requestBackupForRegeneration;
+    if (item.requestType!="GET"){
+      if (item.requestsSelector)
+      {
+        console.log ('item: '+item.name+'will use: '+item.requestsSelector.getValue());
+      
+        try {
+          item.requestDisplay.textContent = item.requests.find (selection => selection.selectValue == item.requestsSelector.getValue()).request
+        } catch (error) {
+          console.error ('handleRegenerate:: could not find request for selection:',item.requestsSelector.getValue(),' from ',item.requestsSelector.name, ' for ', item.name);
+          console.log (error);
+          item.requestDisplay.textContent = '//FixME: could not find value for '+item.requestsSelector.getValue()+' in '+item.requestsSelector.name;
+        }
+      } else if (item.request) {
+        item.requestDisplay.textContent = item.request;
+      } else {
+        console.error ('handleRegenerate::',item.name,' : no request body available (?)');
+      }
+    }
+    //item.requestDisplay.textContent = item.request;
     item.endpointDisplay.textContent = item.endpoint;
 };
  
@@ -129,6 +147,55 @@ function validateJsonBackground(targetDiv) {
   option.element = textInput;
 }
 
+function addDropdown(id, option) {
+  const targetDiv = document.getElementById(id);
+
+  let col = document.createElement('div');
+  //col.classList.add('col-sm-2');
+  col.classList.add('my-1');
+
+  if (option.hasOwnProperty('label')) {
+    col.innerText = option.label;
+  } else {
+    col.innerText = 'Select a value for ' + option.name;
+  }
+
+  const dropdown = document.createElement('select');
+  col.appendChild(dropdown);
+  dropdown.id = 'option__' + option.name;
+  dropdown.classList.add('form-select');
+  dropdown.classList.add('form-select-sm');
+
+  if (option.values){
+    option.values.forEach(function (item) {
+      const option1 = document.createElement('option');
+      option1.value = item.value;
+      option1.text = item.description ? item.value + ' ' + item.description : item.value;
+      dropdown.appendChild(option1);
+    });
+  }
+
+  targetDiv.appendChild(col);
+  if ('value' in option) {
+    dropdown.value = option.value;
+  }
+  
+  // save the value of the checkbox to the cookie on change
+  dropdown.addEventListener('change', function () {
+    option.value = dropdown.value;
+  });
+  if (typeof option.onChange === 'function') {
+    dropdown.addEventListener('change', () => {
+      option.onChange(option, dropdown);
+    });
+    option.onChange(option, dropdown); // execute the onchange upon creation
+  }
+  option.dropdownElement = dropdown;
+  option.getValue = () => {
+        return dropdown.value;
+    }
+}
+
 
 function addButton(id, option) {
 
@@ -205,6 +272,9 @@ function addButton(id, option) {
  */
 
 let apiRequests = [];
+
+
+
 
 function addAccordionItem(accordionId, option) {
     const accordion = document.getElementById(accordionId);
@@ -327,7 +397,7 @@ function addAccordionItem(accordionId, option) {
     // Assign references (must be done AFTER insertion)
     const newCheckbox = accordion.querySelector(`#checkbox_${collapseId}`);
     const requestDiv = accordion.querySelector(`#${requestId}`);
-    requestDiv.textContent = option.request;
+    
     requestDiv.addEventListener('paste', (e) => { 
       pasteEventListner(e); 
       validateJsonBackground(requestDiv);
@@ -356,14 +426,20 @@ function addAccordionItem(accordionId, option) {
             //event.stopPropagation();
             fireRequest(option);
         });
+    } else {
+      console.error('addAccordionItem:: ERROR: no playButton found');
     }
 
     if (regenButton ) {
-        option.requestBackupForRegeneration = option.request;
+        //option.requestBackupForRegeneration = option.request;
         regenButton.addEventListener('click', (event) => {
             //event.stopPropagation();
             handleRegenerate(option); 
             validateJsonBackground(option.requestDisplay);
         });
+        handleRegenerate(option); 
+        validateJsonBackground(option.requestDisplay);
+    } else {
+      console.error('addAccordionItem:: ERROR: no regenButton found');
     }
 }

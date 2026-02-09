@@ -11,9 +11,29 @@ addTextinput("inputFields", optionApiKey)
 
 let optionLeId={};
 optionLeId.label="Please give the LE id:";
-optionLeId.name="optionApiKey";
+optionLeId.name="optionLEKey";
 optionLeId.value="";
 addTextinput("inputFields", optionLeId)
+
+let optionCountryLE={
+    label:"Country for Legal Entity",
+    name:"optionCountryLE",
+    value:"NL", // default value
+    values:[
+        { value: "NL", description: "Netherlands" },
+        { value: "UK", description: "United Kingdom" },
+        { value: "US", description: "United States"}
+                ],
+    onChange : (option, dropdown) => {
+        console.log("country for LE changed to:" + option.value);
+        for (const apiRequest of apiRequests) {
+            handleRegenerate(apiRequest);
+            validateJsonBackground(apiRequest.requestDisplay);
+        }
+    }
+};
+addDropdown("inputFields", optionCountryLE);
+
 
 let playAllButton={
     label: "select & play all",
