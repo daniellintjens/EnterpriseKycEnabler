@@ -7,6 +7,7 @@
 let getLegalEntity = {
     name: "getLegalEntity", // Used to create IDs: LegalEntityCheckRequest, LegalEntityCheckResponse
     heading: "GET /lem/v4/legalEntities",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/get/legalEntities/(id)",
     requestType: "GET",
     endpoint: "https://kyc-test.adyen.com/lem/v4/legalEntities/{{businessLegalEntityId}}",
     request: "",
@@ -23,6 +24,7 @@ addAccordionItem("KycRequests", getLegalEntity);
 let patchCountryToNlApiCall = {
     name: "patchCountryToNlApiCall",
     heading: "PATCH /lem/v4/legalEntities - change country",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/patch/legalEntities/(id)",
     requestType: "PATCH",
     endpoint: "https://kyc-test.adyen.com/lem/v4/legalEntities/{{businessLegalEntityId}}",
     requests: [ 
@@ -109,6 +111,7 @@ addAccordionItem("KycRequests", patchCountryToNlApiCall);
 let patchOrganizationApiCall = {
     name: "patchOrganizationApiCall",
     heading: "PATCH /lem/v4/legalEntities - Add organization details",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/patch/legalEntities/(id)",
     requestType: "PATCH",
     endpoint: "https://kyc-test.adyen.com/lem/v4/legalEntities/{{businessLegalEntityId}}",
     requests: [ 
@@ -237,6 +240,7 @@ addAccordionItem("KycRequests", patchOrganizationApiCall);
 let postCreateIndividualLEApiCall = {
     name: "postCreateIndividualLEApiCall",
     heading: "POST /lem/v4/legalEntities - create individual LE",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/post/legalEntities",
     requestType: "POST",
     endpoint: "https://kyc-test.adyen.com/lem/v4/legalEntities",
     requests: [ 
@@ -357,6 +361,7 @@ addAccordionItem("KycRequests", postCreateIndividualLEApiCall);
 let patchAssociateIndividualApiCall = {
     name: "patchAssociateIndividualApiCall",
     heading: "PATCH /lem/v4/legalEntities - Add entity associations",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/patch/legalEntities/(id)",
     requestType: "PATCH",
     endpoint: "https://kyc-test.adyen.com/lem/v4/legalEntities/{{businessLegalEntityId}}",
     request: JSON.stringify(
@@ -395,6 +400,7 @@ addAccordionItem("KycRequests", patchAssociateIndividualApiCall);
 let postCreateTransferInstrumentApiCall = {
     name: "postCreateTransferInstrumentApiCall",
     heading: "POST /lem/v4/transferInstruments - Create transfer instrument",
+    docUrl :"https://docs.adyen.com/api-explorer/legalentity/4/post/transferInstruments",
     requestType: "POST",
     endpoint: "https://kyc-test.adyen.com/lem/v4/transferInstruments",
     requests: [ 
@@ -451,6 +457,7 @@ addAccordionItem("KycRequests", postCreateTransferInstrumentApiCall);
 let postCreateBusinessLineBankingApiCall = {
     name: "postCreateBusinessLineBankingApiCall",
     heading: "POST /lem/v4/businessLines - Create businessLine Business Account",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/post/businessLines",
     requestType: "POST",
     endpoint: "https://kyc-test.adyen.com/lem/v4/businessLines",
     currencies : [  { "country": "NL", "currency": "EUR"}, 
@@ -497,6 +504,7 @@ addAccordionItem("KycRequests", postCreateBusinessLineBankingApiCall);
 let postCreateBusinessLinePaymentProcessingApiCall = {
     name: "postCreateBusinessLinePaymentProcessingApiCall",
     heading: "POST /lem/v4/businessLines - Create businessLine Payment Processing",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/post/businessLines",
     requestType: "POST",
     endpoint: "https://kyc-test.adyen.com/lem/v4/businessLines",
     request: JSON.stringify(
@@ -527,6 +535,7 @@ addAccordionItem("KycRequests", postCreateBusinessLinePaymentProcessingApiCall);
 let postUploadBusinessRegistrationDocApiCall = {
     name: "postUploadBusinessRegistrationDocApiCall",
     heading: "POST /lem/v4/documents - Upload business registration document",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/post/documents",
     requestType: "POST",
     endpoint: "https://kyc-test.adyen.com/lem/v4/documents",
     request: JSON.stringify(
@@ -556,6 +565,7 @@ addAccordionItem("KycRequests", postUploadBusinessRegistrationDocApiCall);
 let postUploadBankStatementApiCall = {
     name: "postUploadBankStatementApiCall",
     heading: "POST /lem/v4/documents - Upload bank statement",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/post/documents",
     requestType: "POST",
     endpoint: "https://kyc-test.adyen.com/lem/v4/documents",
     request: JSON.stringify(
@@ -585,6 +595,7 @@ addAccordionItem("KycRequests", postUploadBankStatementApiCall);
 let postUploadPassportDocApiCall = {
     name: "postUploadPassportDocApiCall",
     heading: "POST /lem/v4/documents - Upload passport picture",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/post/documents",
     requestType: "POST",
     endpoint: "https://kyc-test.adyen.com/lem/v4/documents",
     request: JSON.stringify(
@@ -614,6 +625,7 @@ addAccordionItem("KycRequests", postUploadPassportDocApiCall);
 let postGenerateTosDocAfpaApiCall = {
     name: "postGenerateTosDocAfpaApiCall",
     heading: "POST /lem/v4/legalEntities/{id}/termsOfService - Create TOS document (adyenForPlatformsAdvanced)",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/post/legalEntities/(id)/termsOfService",
     requestType: "POST",
     endpoint: "https://kyc-test.adyen.com/lem/v4/legalEntities/{{businessLegalEntityId}}/termsOfService",
     request: JSON.stringify(
@@ -638,6 +650,7 @@ addAccordionItem("KycRequests", postGenerateTosDocAfpaApiCall);
 let patchTosDocAfpaApiCall = {
     name: "patchTosDocAfpaApiCall",
     heading: "PATCH /lem/v4/legalEntities/{id}/termsOfService/{id} - Accept TOS (adyenForPlatformsAdvanced)",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/patch/legalEntities/(id)/termsOfService/(termsofservicedocumentid)",
     requestType: "PATCH",
     endpoint: "https://kyc-test.adyen.com/lem/v4/legalEntities/{{businessLegalEntityId}}/termsOfService/{{termsofservicedocumentid}}",
     request: JSON.stringify(
@@ -667,6 +680,7 @@ addAccordionItem("KycRequests", patchTosDocAfpaApiCall);
 let postGenerateTosDocAaApiCall = {
     name: "postGenerateTosDocAaApiCall",
     heading: "POST /lem/v4/legalEntities/{id}/termsOfService - Create TOS document (adyenAccount)",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/post/legalEntities/(id)/termsOfService",
     requestType: "POST",
     endpoint: "https://kyc-test.adyen.com/lem/v4/legalEntities/{{businessLegalEntityId}}/termsOfService",
     request: JSON.stringify(
@@ -687,6 +701,7 @@ addAccordionItem("KycRequests", postGenerateTosDocAaApiCall);
 let patchTosDocAaApiCall = {
     name: "patchTosDocAaApiCall",
     heading: "PATCH /lem/v4/legalEntities/{id}/termsOfService/{id} - Accept TOS (adyenAccount)",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/patch/legalEntities/(id)/termsOfService/(termsofservicedocumentid)",
     requestType: "PATCH",
     endpoint: "https://kyc-test.adyen.com/lem/v4/legalEntities/{{businessLegalEntityId}}/termsOfService/{{termsofservicedocumentid}}",
     request: JSON.stringify(
@@ -723,6 +738,7 @@ addAccordionItem("KycRequests", patchTosDocAaApiCall);
 let postGenerateTosDocPccrApiCall = {
     name: "postGenerateTosDocPccrApiCall",
     heading: "POST /lem/v4/legalEntities/{id}/termsOfService - Create TOS document (Pccr)",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/post/legalEntities/(id)/termsOfService",
     requestType: "POST",
     endpoint: "https://kyc-test.adyen.com/lem/v4/legalEntities/{{businessLegalEntityId}}/termsOfService",
     request: JSON.stringify(
@@ -743,6 +759,7 @@ addAccordionItem("KycRequests", postGenerateTosDocPccrApiCall);
 let patchTosDocPccrApiCall = {
     name: "patchTosDocPccrApiCall",
     heading: "PATCH /lem/v4/legalEntities/{id}/termsOfService/{id} - Accept TOS (Pccr)",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/patch/legalEntities/(id)/termsOfService/(termsofservicedocumentid)",
     requestType: "PATCH",
     endpoint: "https://kyc-test.adyen.com/lem/v4/legalEntities/{{businessLegalEntityId}}/termsOfService/{{termsofservicedocumentid}}",
     request: JSON.stringify(

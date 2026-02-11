@@ -302,22 +302,10 @@ function addAccordionItem(accordionId, option) {
     const requestId = `${uniqueName}Request`;
     const responseId = `${uniqueName}Response`;
     const endpointId = `${uniqueName}Endpoint`;
-    
-    // Determine initial content for the request div
-    //const initialRequestContent = option.request || '';
 
     // 2. Generate the dynamic accordion body template
-    /*const accordionBodyContent = `
-        <div class="p-2 border rounded bg-light mb-3">
-            <h6 class="mb-1 text-primary">Request</h6>
-            <div id="${requestId}">${initialRequestContent}</div>
-        </div>
-        <div class="p-2 border rounded bg-light">
-            <h6 class="mb-1 text-success">Response</h6>
-            <div id="${responseId}">No response yet.</div>
-        </div>
-    `;*/
     const accordionBodyContent = `
+    <a href=${option.docUrl} target="_blank" style="font-size: 10px;">Link to docs for this endpoint</a>
     <div class="p-2 border rounded bg-light mb-3">
         <h6 class="mb-1 text-primary">Endpoint</h6>
         <div id="${endpointId}" contenteditable="true" style="min-height: 30px; border: 1px solid #ccc; padding: 5px; background-color: white; font-family: monospace;">   
