@@ -621,6 +621,21 @@ let postUploadPassportDocApiCall = {
 };
 addAccordionItem("KycRequests", postUploadPassportDocApiCall);
 
+let getTosStatus = {
+    name: "getTosStatus", // Used to create IDs: LegalEntityCheckRequest, LegalEntityCheckResponse
+    heading: "GET /lem/v4/legalEntities/{id}/termsOfService - Get TOS status",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/get/legalEntities/(id)/termsOfServiceStatus",
+    requestType: "GET",
+    endpoint: "https://kyc-test.adyen.com/lem/v4/legalEntities/{{businessLegalEntityId}}/termsOfServiceStatus",
+    request: "",
+    preExecute: (item) => { // get the LE from the input fields and patch that into the request
+        if (optionLeId.value) {
+            let replacementValue = optionLeId.value.trim();
+            item.endpointDisplay.innerText = item.endpointDisplay.innerText.replace(new RegExp("{{businessLegalEntityId}}", 'g'), replacementValue);
+        }
+    }
+};
+addAccordionItem("KycRequests", getTosStatus);
 
 let postGenerateTosDocAfpaApiCall = {
     name: "postGenerateTosDocAfpaApiCall",
@@ -727,12 +742,6 @@ let patchTosDocAaApiCall = {
     }
 };
 addAccordionItem("KycRequests", patchTosDocAaApiCall);
-
-
-
-
-
-
 
 
 let postGenerateTosDocPccrApiCall = {
