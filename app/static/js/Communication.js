@@ -1,7 +1,14 @@
- 
- const PROXY_POST_URL = JSON.parse(document.getElementById('PROXY_POST_URL').innerHTML);
- const PROXY_PATCH_URL = JSON.parse(document.getElementById('PROXY_PATCH_URL').innerHTML);
- const PROXY_GET_URL = JSON.parse(document.getElementById('PROXY_GET_URL').innerHTML);
+let protocol = "http:";
+if (window.location.protocol === 'https:') {
+  protocol = 'https:';
+} else {
+  protocol = 'http:';
+}
+
+
+ const PROXY_POST_URL = protocol+"//"+JSON.parse(document.getElementById('PROXY_POST_URL').innerHTML);
+ const PROXY_PATCH_URL = protocol+"//"+JSON.parse(document.getElementById('PROXY_PATCH_URL').innerHTML);
+ const PROXY_GET_URL = protocol+"//"+JSON.parse(document.getElementById('PROXY_GET_URL').innerHTML);
 
 
 
