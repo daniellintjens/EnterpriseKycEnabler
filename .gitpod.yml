@@ -1,0 +1,4 @@
+tasks:
+  - init: |
+      gp_url=$(gp url 8080)
+      echo "BACKEND_URL=$gp_url" >> .env
