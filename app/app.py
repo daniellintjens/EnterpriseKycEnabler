@@ -54,11 +54,21 @@ def create_app():
 
         base_url = f"{protocol}://{request.host}"
         logger.info("base_url: "+base_url)
+        if os.environ.get("BACKEND_URL", "not_running_in_codespace")!="not_running_in_codespace":
+            #codespaces removes ports
+            Proxy_Post_Url = f"{get_domain()}{Post_Proxy_URL}",
+            Proxy_Patch_Url = f"{get_domain()}{Patch_Proxy_URL}",
+            Proxy_Get_Url = f"{get_domain()}{Get_Proxy_URL}"
+        else:
+            Proxy_Post_Url = f"{get_domain()}:{get_port()}{Post_Proxy_URL}",
+            Proxy_Patch_Url = f"{get_domain()}:{get_port()}{Patch_Proxy_URL}",
+            Proxy_Get_Url = f"{get_domain()}:{get_port()}{Get_Proxy_URL}"
+
         response = make_response(render_template(
             'KYC enabler.html',
-            PROXY_POST_URL=f"{get_domain()}:{get_port()}{Post_Proxy_URL}",
-            PROXY_PATCH_URL=f"{get_domain()}:{get_port()}{Patch_Proxy_URL}",
-            PROXY_GET_URL=f"{get_domain()}:{get_port()}{Get_Proxy_URL}"
+            PROXY_POST_URL=f"{Proxy_Post_Url}",
+            PROXY_PATCH_URL=f"{Proxy_Patch_Url}",
+            PROXY_GET_URL=f"{Proxy_Get_Url}"
         ))
         return response
 
