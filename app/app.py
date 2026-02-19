@@ -20,6 +20,8 @@ load_dotenv(find_dotenv())
 def get_port():
     return os.environ.get("PORT", 8080) # default 8080
 
+def get_domain():
+    return os.environ.get("BACKEND_URL", "localhost")
 
 Post_Proxy_URL  = "/api/proxy/post"
 Patch_Proxy_URL = "/api/proxy/patch"
@@ -54,9 +56,9 @@ def create_app():
         logger.info("base_url: "+base_url)
         response = make_response(render_template(
             'KYC enabler.html',
-            PROXY_POST_URL=f"{protocol}://localhost:{get_port()}{Post_Proxy_URL}",
-            PROXY_PATCH_URL=f"{protocol}://localhost:{get_port()}{Patch_Proxy_URL}",
-            PROXY_GET_URL=f"{protocol}://localhost:{get_port()}{Get_Proxy_URL}"
+            PROXY_POST_URL=f"{protocol}://{get_domain()}:{get_port()}{Post_Proxy_URL}",
+            PROXY_PATCH_URL=f"{protocol}://{get_domain()}:{get_port()}{Patch_Proxy_URL}",
+            PROXY_GET_URL=f"{protocol}://{get_domain()}:{get_port()}{Get_Proxy_URL}"
         ))
         return response
 
