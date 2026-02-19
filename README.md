@@ -6,7 +6,12 @@
 This project gives you an easy way to remove any blocking KYC for _enterprise payouts_ and _enterprise bank_ accountholders in TEST. It kind of works the same as the [tool found on rooftown]([url](https://www.rooftown.nl/payouts?type=workshop)) https://www.rooftown.nl/payouts?type=workshop. 
 This tool will give you a bit more flexibility as you can freely edit the messages before sending, and patch in any changes needed for your specific case. As the source is available and the tool can easely be run locally, patching the tool when there are any bugs, new LEM API changes or missing functionality should be easy. 
 
-## Now supports UK and US entities!
+## Releases
+
+### 2025-02-19 Now supports codespaces
+You can deploy the EnterpriseKycEnabler now in codespaces! Just create a codespace using "Code"->"Codespaces"-> "+". It will auto-setup and auto-run. You only have to wait untill the popup with the browser link shows up on the right bottom corner and the app is ready for use! 
+
+### 2025-02-0? Now supports UK and US entities!
 Now comes with full support of UK and US based entities. Use the dropdown to select the country, and the requests will refresh upon selection to the correct version for the selected country. 
 
 ## Known issues
