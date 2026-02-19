@@ -11,7 +11,7 @@ This tool will give you a bit more flexibility as you can freely edit the messag
 ### 2025-02-19 Now supports codespaces
 You can deploy the EnterpriseKycEnabler now in codespaces! Just create a codespace using "Code"->"Codespaces"-> "+". It will auto-setup and auto-run. You only have to wait untill the popup with the browser link shows up on the right bottom corner and the app is ready for use! 
 
-### 2025-02-0? Now supports UK and US entities!
+### 2025-02-09 Now supports UK and US entities!
 Now comes with full support of UK and US based entities. Use the dropdown to select the country, and the requests will refresh upon selection to the correct version for the selected country. 
 
 ## Known issues
