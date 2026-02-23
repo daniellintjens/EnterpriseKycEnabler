@@ -411,7 +411,7 @@ let postCreateTransferInstrumentApiCall = {
             "bankAccount": {
                 "accountIdentification": {
                     "type": "iban",
-                    "iban": "NL62ABNA0000000123"
+                    "iban": "NL57INGB4654188101"
                 }
             }
         }, function replacer(key, value) { if (typeof (value) === 'function') { return value.toString(); } return value; }, 2),
@@ -423,8 +423,8 @@ let postCreateTransferInstrumentApiCall = {
             "bankAccount": {
                 "accountIdentification": {
                     "type": "ukLocal",
-                    "accountNumber": "00000123",
-                    "sortCode": "090102"
+                    "accountNumber": "50000000",
+                    "sortCode": "202678"
                 }
             }
         }, function replacer(key, value) { if (typeof (value) === 'function') { return value.toString(); } return value; }, 2),
@@ -436,9 +436,9 @@ let postCreateTransferInstrumentApiCall = {
             "bankAccount": {
                 "accountIdentification": {
                     "type": "usLocal",
-                    "accountNumber": "0000000123",
+                    "accountNumber": "10220001111",
                     "accountType": "checking",
-                    "routingNumber": "121202211"
+                    "routingNumber": "121000248"
                 }
             }
         }, function replacer(key, value) { if (typeof (value) === 'function') { return value.toString(); } return value; }, 2),

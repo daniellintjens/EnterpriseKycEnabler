@@ -56,12 +56,12 @@ def create_app():
         logger.info("base_url: "+base_url)
         if os.environ.get("BACKEND_URL", "not_running_in_codespace")!="not_running_in_codespace":
             #codespaces removes ports
-            Proxy_Post_Url = f"{get_domain()}{Post_Proxy_URL}",
-            Proxy_Patch_Url = f"{get_domain()}{Patch_Proxy_URL}",
+            Proxy_Post_Url = f"{get_domain()}{Post_Proxy_URL}"
+            Proxy_Patch_Url = f"{get_domain()}{Patch_Proxy_URL}"
             Proxy_Get_Url = f"{get_domain()}{Get_Proxy_URL}"
         else:
-            Proxy_Post_Url = f"{get_domain()}:{get_port()}{Post_Proxy_URL}",
-            Proxy_Patch_Url = f"{get_domain()}:{get_port()}{Patch_Proxy_URL}",
+            Proxy_Post_Url = f"{get_domain()}:{get_port()}{Post_Proxy_URL}"
+            Proxy_Patch_Url = f"{get_domain()}:{get_port()}{Patch_Proxy_URL}"
             Proxy_Get_Url = f"{get_domain()}:{get_port()}{Get_Proxy_URL}"
 
         response = make_response(render_template(
