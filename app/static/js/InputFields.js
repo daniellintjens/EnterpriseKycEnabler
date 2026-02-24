@@ -3,10 +3,38 @@
 
 
 
-let optionApiKey={};
-optionApiKey.label="Please give the API key:";
-optionApiKey.name="optionApiKey"; 
-optionApiKey.value="";
+let optionApiKey={
+    label : "Please give the API key:",
+    name : "optionApiKey",
+    value : "",
+    onCreation : (option, textInput) => {
+        
+        if (localStorage.hasOwnProperty('option_'+option.name)) {
+            console.log(option.name+"::API key value restored from local storage");
+            option.value = localStorage.getItem('option_'+option.name);
+            textInput.value = option.value;
+            //set background color to soft blue to indicate a prev saved value was used:
+            textInput.style.backgroundColor = "#f0f7ff";
+        }
+        textInput.addEventListener('input', () => {
+            //any input reverts the background to white
+            textInput.style.backgroundColor = "white"; 
+        });
+    },
+    onChange : (option, textInput) => {
+        console.log(option.name+"::API key changed to:" + option.value);
+        if (localStorage.hasOwnProperty('option_'+option.name)) {
+            let valueInStorage = localStorage.getItem('option_'+option.name);
+            if (valueInStorage != option.value){
+                localStorage.setItem('option_'+option.name, textInput.value); 
+                console.log(option.name+"::API key value saved to local storage");
+                //probably not needed, but just in case 
+                textInput.style.backgroundColor = "white"; 
+            }
+        } 
+        
+    }
+}
 addTextinput("inputFields", optionApiKey) 
 
 let optionLeId={};

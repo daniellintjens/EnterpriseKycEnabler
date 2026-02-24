@@ -134,6 +134,9 @@ function validateJsonBackground(targetDiv) {
   if ('value' in option) {
     textInput.value = option.value;
   }
+  if (typeof option.onCreation === 'function') {
+    option.onCreation(option, textInput);
+  }
   // save the value of the checkbox to the cookie on change
   textInput.addEventListener('change', () => {
     option.value= textInput.value;
@@ -144,6 +147,7 @@ function validateJsonBackground(targetDiv) {
     });
     option.onChange(option, textInput);
   }
+  
   option.element = textInput;
 }
 
