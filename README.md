@@ -8,10 +8,13 @@ This tool will give you a bit more flexibility as you can freely edit the messag
 
 ## Releases
 
-### 2025-02-19 Now supports codespaces
+### 2026-02-24 API key caching
+If you're using the tool often (like me) with balance platforms/account holders linked to the same test company account (on PSP) , you will often paste the same API key into the input field. I've implemented key caching for this use case; The API key is stored in the browser local storage and upon loading the tool, the key is retreived. The input box will have a blue background indicating the key was pre-filled from last time's value and returns to white if you edit/past a new value into it.
+
+### 2026-02-19 Now supports codespaces
 You can deploy the EnterpriseKycEnabler now in codespaces! Just create a codespace using "Code"->"Codespaces"-> "+". It will auto-setup and auto-run. You only have to wait untill the popup with the browser link shows up on the right bottom corner and the app is ready for use! 
 
-### 2025-02-09 Now supports UK and US entities!
+### 2026-02-09 Now supports UK and US entities!
 Now comes with full support of UK and US based entities. Use the dropdown to select the country, and the requests will refresh upon selection to the correct version for the selected country. 
 
 ## Known issues
