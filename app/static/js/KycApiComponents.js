@@ -125,6 +125,16 @@ let patchOrganizationApiCall = {
                     "mainSourceOfIncome": "businessOperation",
                     "type": "nonFinancialActive"
                 },
+                "financialReports": [
+                    {
+                    "dateOfFinancialData": "2025-06-30",
+                    "employeeCount": "1000",
+                    "balanceSheetTotal": "100000",
+                    "annualTurnover": "10",
+                    "currencyOfFinancialData": "EUR",
+                    "netAssets": "1000000"
+                    }
+                ],
                 "taxInformation": [
                     {
                         "country": "NL",
@@ -620,6 +630,35 @@ let postUploadPassportDocApiCall = {
     }
 };
 addAccordionItem("KycRequests", postUploadPassportDocApiCall);
+
+let postUploadLiveSelfieApiCall = {
+    name: "postUploadLiveSelfieApiCall",
+    heading: "POST /lem/v4/documents - Upload live selfie picture",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/post/documents",
+    requestType: "POST",
+    endpoint: "https://kyc-test.adyen.com/lem/v4/documents",
+    request: JSON.stringify(
+        {
+            "type": "liveSelfie",
+            "attachments": [
+            {
+                "content": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
+            }
+            ],
+            "description": "Live Selfie",
+            "owner": {
+                "id": "{{individualLegalEntityId}}",
+                "type": "legalEntity"
+            }
+        }, function replacer(key, value) { if (typeof (value) === 'function') { return value.toString(); } return value; }, 2),
+    preExecute: (item) => { // get the LE from the previous postCreateIndividualLEApiCall and patch that into the request
+        if (postCreateIndividualLEApiCall && postCreateIndividualLEApiCall?.responseDisplay?.innerText.trim() != "No response yet.") {
+            let replacementValue = JSON.parse(postCreateIndividualLEApiCall.responseDisplay.innerText).id
+            item.requestDisplay.innerText = item.requestDisplay.innerText.replace(new RegExp("{{individualLegalEntityId}}", 'g'), replacementValue);
+        }
+    }
+};
+addAccordionItem("KycRequests", postUploadLiveSelfieApiCall);
 
 let getTosStatus = {
     name: "getTosStatus", // Used to create IDs: LegalEntityCheckRequest, LegalEntityCheckResponse
