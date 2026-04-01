@@ -8,6 +8,9 @@ This tool will give you a bit more flexibility as you can freely edit the messag
 
 ## Releases
 
+### 2026-04-01 Added liveSelfie and Financial reports
+Added a new document upload for live selfies and added financial report to the patch organisation call. 
+
 ### 2026-02-24 API key caching
 If you're using the tool often (like me) with balance platforms/account holders linked to the same test company account (on PSP) , you will often paste the same API key into the input field. I've implemented key caching for this use case; The API key is stored in the browser local storage and upon loading the tool, the key is retreived. The input box will have a blue background indicating the key was pre-filled from last time's value and returns to white if you edit/past a new value into it.
 
