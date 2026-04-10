@@ -541,6 +541,70 @@ let postCreateBusinessLinePaymentProcessingApiCall = {
 };
 addAccordionItem("KycRequests", postCreateBusinessLinePaymentProcessingApiCall);
 
+/*
+let getBusinessLinePaymentProcessingApiCall = {
+    name: "getBusinessLinePaymentProcessingApiCall",
+    heading: "GET /lem/v4/businessLines - get businessLine Payment Processing",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/get/businessLines(id)",
+    requestType: "GET",
+    endpoint: "https://kyc-test.adyen.com/lem/v4/businessLines/{{businessLineId}}",
+    request: "",
+    preExecute: (item) => { // get the businessline from previous request
+        if (postCreateBusinessLinePaymentProcessingApiCall && postCreateBusinessLinePaymentProcessingApiCall?.responseDisplay?.innerText.trim() != "No response yet.") {
+            let replacementValue = JSON.parse(postCreateBusinessLinePaymentProcessingApiCall.responseDisplay.innerText).id
+            item.requestDisplay.innerText = item.requestDisplay.innerText.replace(new RegExp("{{businessLineId}}", 'g'), replacementValue);
+        }
+    }
+};
+addAccordionItem("KycRequests", getBusinessLinePaymentProcessingApiCall);
+*/
+
+let getBusinessLinesPaymentProcessingApiCall = {
+    name: "getBusinessLinesPaymentProcessingApiCall",
+    heading: "GET lem/v4/legalEntities/{id}/businessLines - get businessLines for LE",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/get/legalEntities/(id)/businessLines",
+    requestType: "GET",
+    endpoint: "https://kyc-test.adyen.com/lem/v4/legalEntities/{{businessLegalEntityId}}/businessLines",
+    request: "",
+    preExecute: (item) => { // get the businesslines for LE
+        if (optionLeId.value) {
+            let replacementValue = optionLeId.value.trim();
+            item.endpointDisplay.innerText = item.endpointDisplay.innerText.replace(new RegExp("{{businessLegalEntityId}}", 'g'), replacementValue);
+        }
+    }
+};
+addAccordionItem("KycRequests", getBusinessLinesPaymentProcessingApiCall);
+
+/*
+let patchBusinessLinePaymentProcessingApiCall = {
+    name: "patchBusinessLinePaymentProcessingApiCall",
+    heading: "PATCH /lem/v4/businessLines - Patch businessLine Payment Processing",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/patch/businessLines/(id)",
+    requestType: "POST",
+    endpoint: "https://kyc-test.adyen.com/lem/v4/businessLines/{{businessLineId}}",
+    request: JSON.stringify(
+        {
+            "service": "paymentProcessing",
+            "industryCode": "339E",
+            "salesChannels": [
+                "eCommerce",
+                "ecomMoto"
+            ],
+            "webData": [
+                {
+                    "webAddress": "https://yoururl.com"
+                }
+            ]
+        }, function replacer(key, value) { if (typeof (value) === 'function') { return value.toString(); } return value; }, 2),
+    preExecute: (item) => { // get the LE from the input fields and patch that into the request
+       if (postCreateBusinessLinePaymentProcessingApiCall && postCreateBusinessLinePaymentProcessingApiCall?.responseDisplay?.innerText.trim() != "No response yet.") {
+            let replacementValue = JSON.parse(postCreateBusinessLinePaymentProcessingApiCall.responseDisplay.innerText).id
+            item.requestDisplay.innerText = item.requestDisplay.innerText.replace(new RegExp("{{businessLineId}}", 'g'), replacementValue);
+        }
+    }
+};
+addAccordionItem("KycRequests", patchBusinessLinePaymentProcessingApiCall);
+*/
 
 let postUploadBusinessRegistrationDocApiCall = {
     name: "postUploadBusinessRegistrationDocApiCall",
