@@ -1,7 +1,8 @@
 # Enterprise Payouts / Bank KYC enabler
 
 ## HOWTO run
-You can this tool in codespaces. Create a codespace using "Code"->"Codespaces"-> "+" in the github menu/buttons. This will deploy the tool and automatically start it. Once initiated, wait untill the popup with the browser link shows up on the right bottom corner. Click the browser link and the app will start in a new window.
+You can run this tool in codespaces. Create a codespace using "Code"->"Codespaces"-> "+" in the github menu/buttons. This will deploy the tool and automatically start it. Once initiated, wait untill the popup with the browser link shows up on the right bottom corner. Click the browser link and the app will start in a new window.
+Alternatively, see the "local installation" steps below to run your own local copy. 
 
 ## Description
 This project gives you an easy way to remove any blocking KYC for _enterprise payouts_ and _enterprise bank_ accountholders in TEST. It kind of works the same as the [tool found on rooftown]([url](https://www.rooftown.nl/payouts?type=workshop)) https://www.rooftown.nl/payouts?type=workshop. 
