@@ -10,6 +10,9 @@ This tool will give you a bit more flexibility as you can freely edit the messag
 
 ## Releases
 
+### 2026-07-13 Added adyenCard TOS 
+Added signing of TOS for adyenCard, which is needed for issuing. 
+
 ### 2026-04-01 Added liveSelfie and Financial reports
 Added a new document upload for live selfies and added financial report to the patch organisation call. 
 

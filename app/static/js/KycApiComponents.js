@@ -541,6 +541,38 @@ let postCreateBusinessLinePaymentProcessingApiCall = {
 };
 addAccordionItem("KycRequests", postCreateBusinessLinePaymentProcessingApiCall);
 
+let postCreateBusinessLineIssuingApiCall = {
+    name: "postCreateBusinessLineIssuingApiCall",
+    heading: "POST /lem/v4/businessLines - Create businessLine Issuing",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/post/businessLines",
+    requestType: "POST",
+    endpoint: "https://kyc-test.adyen.com/lem/v4/businessLines",
+    request: JSON.stringify(
+        {
+            "service": "issuing",
+            "industryCode": "45391",
+            "sourceOfFunds": {
+                "adyenProcessedFunds": false,
+                "type": "assetSale",
+                "dateOfSourceEvent": "2024-12-03",
+                "description": "Sale of my property at Turfmarkt 654A, Haarlem, 2011CA.",
+                "amount": {
+                    "currency": "EUR",
+                    "value": 600000
+                }
+            },
+
+            "legalEntityId": "{{businessLegalEntityId}}"
+            
+        }, function replacer(key, value) { if (typeof (value) === 'function') { return value.toString(); } return value; }, 2),
+    preExecute: (item) => { // get the LE from the input fields and patch that into the request
+        if (optionLeId.value) {
+            let replacementValue = optionLeId.value.trim();
+            item.requestDisplay.innerText = item.requestDisplay.innerText.replace(new RegExp("{{businessLegalEntityId}}", 'g'), replacementValue);
+        }
+    }
+};
+addAccordionItem("KycRequests", postCreateBusinessLineIssuingApiCall);
 /*
 let getBusinessLinePaymentProcessingApiCall = {
     name: "getBusinessLinePaymentProcessingApiCall",
@@ -897,3 +929,54 @@ let patchTosDocPccrApiCall = {
     }
 };
 addAccordionItem("KycRequests", patchTosDocPccrApiCall);
+
+let postGenerateTosDocAdyenCardApiCall = {
+    name: "postGenerateTosDocAdyenCardApiCall",
+    heading: "POST /lem/v4/legalEntities/{id}/termsOfService - Create TOS document (AdyenCard)",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/post/legalEntities/(id)/termsOfService",
+    requestType: "POST",
+    endpoint: "https://kyc-test.adyen.com/lem/v4/legalEntities/{{businessLegalEntityId}}/termsOfService",
+    request: JSON.stringify(
+        {
+            "type": "adyenCard",
+            "language": "en"
+        }, function replacer(key, value) { if (typeof (value) === 'function') { return value.toString(); } return value; }, 2),
+    preExecute: (item) => { // get the LE from the input fields and patch that into the endpoint
+        if (optionLeId.value) {
+            let replacementValue = optionLeId.value.trim();
+            item.endpointDisplay.innerText = item.endpointDisplay.innerText.replace(new RegExp("{{businessLegalEntityId}}", 'g'), replacementValue);
+        }
+    }
+};
+addAccordionItem("KycRequests", postGenerateTosDocAdyenCardApiCall);
+
+
+let patchTosDocAdyenCardApiCall = {
+    name: "patchTosDocAdyenCardApiCall",
+    heading: "PATCH /lem/v4/legalEntities/{id}/termsOfService/{id} - Accept TOS (AdyenCard)",
+    docUrl: "https://docs.adyen.com/api-explorer/legalentity/4/patch/legalEntities/(id)/termsOfService/(termsofservicedocumentid)",
+    requestType: "PATCH",
+    endpoint: "https://kyc-test.adyen.com/lem/v4/legalEntities/{{businessLegalEntityId}}/termsOfService/{{termsofservicedocumentid}}",
+    request: JSON.stringify(
+        {
+            "acceptedBy": "{{individualLegalEntityId}}"
+        },
+        function replacer(key, value) { if (typeof (value) === 'function') { return value.toString(); } return value; }, 2),
+
+    preExecute: (item) => { // get the LE from the input fields and patch that into the endpoint
+        if (optionLeId.value) {
+            let replacementValue = optionLeId.value.trim();
+            item.endpointDisplay.innerText = item.endpointDisplay.innerText.replace(new RegExp("{{businessLegalEntityId}}", 'g'), replacementValue);
+        }
+        if (postGenerateTosDocAdyenCardApiCall && postGenerateTosDocAdyenCardApiCall?.responseDisplay?.innerText.trim() != "No response yet.") {
+            let replacementValue = JSON.parse(postGenerateTosDocAdyenCardApiCall.responseDisplay.innerText).termsOfServiceDocumentId;
+            item.endpointDisplay.innerText = item.endpointDisplay.innerText.replace(new RegExp("{{termsofservicedocumentid}}", 'g'), replacementValue);
+        }
+        if (postCreateIndividualLEApiCall && postCreateIndividualLEApiCall?.responseDisplay?.innerText.trim() != "No response yet.") {
+            let replacementValue = JSON.parse(postCreateIndividualLEApiCall.responseDisplay.innerText).id
+            item.requestDisplay.innerText = item.requestDisplay.innerText.replace(new RegExp("{{individualLegalEntityId}}", 'g'), replacementValue);
+
+        }
+    }
+};
+addAccordionItem("KycRequests", patchTosDocAdyenCardApiCall);
